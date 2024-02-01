@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Intro to FeatureLayer | Sample | ArcGIS Maps SDK for JavaScript 4.28</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.28/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      require(["esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer"], (Map, MapView, FeatureLayer) => {
+        const map = new Map({
+          basemap: "hybrid"
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+
+          extent: {
+            // autocasts as new Extent()
+            xmin: 35.5,
+            ymin: 31.5,
+            xmax: 42,
+            ymax: 34.5,
+            spatialReference: 4326
+          }
+        });
+
+        /********************
+         * Add feature layer
+         ********************/
+
+        // Carbon storage of trees in Warren Wilson College.
+        const featureLayer = new FeatureLayer({
+          url: "https://services2.arcgis.com/bB9Y1bGKerz1PTl5/arcgis/rest/services/gaza_hotspots_airstrikes_002/FeatureServer/0"
+        });
+
+        map.add(featureLayer);
+        
+const featureLayer1 = new FeatureLayer({
+          url: "https://services2.arcgis.com/bB9Y1bGKerz1PTl5/arcgis/rest/services/a7f373/FeatureServer/0"
+        });
+
+        map.add(featureLayer1);
+        
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
